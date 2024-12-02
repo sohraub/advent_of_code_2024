@@ -13,7 +13,6 @@ fn read_lines(filename: &str) -> Vec<String> {
 
 fn check_if_safe(mut values: Vec<u32>, dampener: bool, remove_value: usize) -> (u16, usize) {
     let mut result: (u16, usize);
-    println!("{:?}", values);
     if remove_value < 100 {
         values.remove(remove_value);
     }
@@ -23,7 +22,8 @@ fn check_if_safe(mut values: Vec<u32>, dampener: bool, remove_value: usize) -> (
             result = check_if_increasing(&values);
             if dampener && result.0 == 0 {
                 let new_values = values;
-                for i in result.1 - 1..=result.1 + 1{
+                //for i in result.1 - 1..=result.1 + 1{
+                for i in 0..new_values.len() {
                     result = check_if_safe(new_values.clone(), false, i);
                     if result.0 == 1 {
                         break
@@ -35,7 +35,8 @@ fn check_if_safe(mut values: Vec<u32>, dampener: bool, remove_value: usize) -> (
             result = check_if_decreasing(&values);
             if dampener && result.0 == 0 {
                 let new_values = values;
-                for i in result.1 - 1..=result.1 + 1{
+                //for i in result.1 - 1..=result.1 + 1{
+                for i in 0..new_values.len() {
                     result = check_if_safe(new_values.clone(), false, i);
                     if result.0 == 1 {
                         break
@@ -100,7 +101,7 @@ fn check_if_increasing(values: &Vec<u32>) -> (u16, usize) {
 
 
 fn main() {
-    let input_file = "./puzzle_input.txt";
+    let input_file = "./test_puzzle_input.txt";
     let  lines = read_lines(&input_file);
 
     let mut final_result: u16 = 0;
