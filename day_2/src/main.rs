@@ -1,6 +1,5 @@
-use std::fs::read_to_string;
 use std::cmp::Ordering;
-
+use std::fs::read_to_string;
 
 fn read_lines(filename: &str) -> Vec<String> {
     read_to_string(filename)
@@ -9,7 +8,6 @@ fn read_lines(filename: &str) -> Vec<String> {
         .map(String::from)
         .collect()
 }
-
 
 fn check_if_safe(mut values: Vec<u32>, dampener: bool, remove_value: usize) -> (u16, usize) {
     let mut result: (u16, usize);
@@ -26,11 +24,11 @@ fn check_if_safe(mut values: Vec<u32>, dampener: bool, remove_value: usize) -> (
                 for i in 0..new_values.len() {
                     result = check_if_safe(new_values.clone(), false, i);
                     if result.0 == 1 {
-                        break
+                        break;
                     }
                 }
             }
-        },
+        }
         Ordering::Greater => {
             result = check_if_decreasing(&values);
             if dampener && result.0 == 0 {
@@ -39,11 +37,11 @@ fn check_if_safe(mut values: Vec<u32>, dampener: bool, remove_value: usize) -> (
                 for i in 0..new_values.len() {
                     result = check_if_safe(new_values.clone(), false, i);
                     if result.0 == 1 {
-                        break
+                        break;
                     }
                 }
             }
-        },
+        }
         Ordering::Equal => {
             result = (0, 0);
             if dampener {
@@ -52,10 +50,9 @@ fn check_if_safe(mut values: Vec<u32>, dampener: bool, remove_value: usize) -> (
             }
         }
     }
-   
-    return result
-}
 
+    return result;
+}
 
 fn check_if_decreasing(values: &Vec<u32>) -> (u16, usize) {
     let mut is_safe: bool = true;
@@ -72,9 +69,9 @@ fn check_if_decreasing(values: &Vec<u32>) -> (u16, usize) {
     }
 
     if is_safe {
-        return (1, bad_index)
+        return (1, bad_index);
     } else {
-        return (0, bad_index)
+        return (0, bad_index);
     }
 }
 
@@ -93,25 +90,25 @@ fn check_if_increasing(values: &Vec<u32>) -> (u16, usize) {
     }
 
     if is_safe {
-        return (1, bad_index)
+        return (1, bad_index);
     } else {
-        return (0, bad_index)
+        return (0, bad_index);
     }
 }
 
-
 fn main() {
     let input_file = "./test_puzzle_input.txt";
-    let  lines = read_lines(&input_file);
+    let lines = read_lines(&input_file);
 
     let mut final_result: u16 = 0;
     let mut values: Vec<u32>;
 
     for line in &lines {
-        values = line.split_whitespace()
+        values = line
+            .split_whitespace()
             .map(|x| x.parse::<u32>().unwrap())
             .collect();
-        final_result += check_if_safe(values,  false, 101).0
+        final_result += check_if_safe(values, false, 101).0
     }
 
     println!("Safe Reports without problem dampener: {final_result}");
@@ -119,10 +116,11 @@ fn main() {
     final_result = 0;
 
     for line in &lines {
-        values = line.split_whitespace()
+        values = line
+            .split_whitespace()
             .map(|x| x.parse::<u32>().unwrap())
             .collect();
-        final_result += check_if_safe(values,  true, 101).0
+        final_result += check_if_safe(values, true, 101).0
     }
 
     println!("Safe Reports with problem dampener: {final_result}");
