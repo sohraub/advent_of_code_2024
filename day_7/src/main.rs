@@ -69,7 +69,6 @@ fn determine_sum_of_valid_results(inputs: &HashMap<u64, Vec<u64>>, concat: bool)
         'check_valid: for operation in all_operations {
             let operations: Vec<char> = operation.chars().collect();
             let mut sum: u64 = 0;
-            let mut concat_checkpoint: String = "".to_string();
             for (i, x) in value.iter().enumerate() {
                 if i == 0 {
                     sum = *x;
