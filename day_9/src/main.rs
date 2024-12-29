@@ -134,8 +134,8 @@ fn calculate_checksum_part2(mut disk_map: Vec<i32>) -> i64 {
                     } else {
                         empty_spaces.remove(index);
                     }
-                    break
                 }
+                    break
             }
 
         }
