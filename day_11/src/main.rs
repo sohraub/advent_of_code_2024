@@ -1,6 +1,5 @@
 use std::fs::read_to_string;
 use std::collections::HashMap;
-use std::hash::Hash;
 
 fn main() {
     let input: Vec<u64> = read_to_string("./puzzle_input.txt")
