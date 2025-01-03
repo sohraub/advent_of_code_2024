@@ -1,0 +1,9 @@
+[package]
+name = "day_14"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+regex = "1.11.1"
+array2d = "0.3.2"
+itertools = "0.14.0"
